@@ -5,23 +5,34 @@
 #include "TimeSpan.h"
 using namespace std;
 void TestingPrints();
-int main() {
+int main() 
+{
     TestingPrints();
     return 0;
 }
-void TestingPrints() {
+void TestingPrints() 
+{
+    cout << "Testing all TimeSpan Constructors:" << endl;
     const TimeSpan test{45};
     cout << test << endl;
 
-    const TimeSpan test2{15,15};
+     TimeSpan test2{15,15.9};
     cout << test2 << endl;
 
     const TimeSpan test3{1.5,4,-10};
     cout << test3 << endl;
 
-    cout << "Testing all TimeSpan Constructors:" << endl;
     const TimeSpan test4{1.5, -45, 8};
     const TimeSpan test6{1,1,1};
+
+    cout << "testing setTime method" << endl; 
+    test2.setTime(1,2,3);
+    cout << test2 << endl;  
+
+    cout << "testing a faulty constructor" << endl; 
+    const TimeSpan test5{-1,3,3}; 
+    cout << test5 << endl; 
+    
 
     cout << test4 << endl;
     cout << test6 << endl;

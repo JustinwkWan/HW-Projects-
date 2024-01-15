@@ -6,16 +6,13 @@
 #endif //LAB1_TIMESPAN_H
 #include <iostream>
 #include <cmath>
-/**
- * Questions to ask in class:
- * Do we need to consider float/double values for seconds?
- * When I input negative values for seconds in floats, it gives me really big numbers?
- * EX: Input -1, output -1895886849
- */
 using namespace std;
-class TimeSpan {
+class TimeSpan 
+{
+    //Implementing StreamIO 
     friend ostream& operator<<(ostream &outStream, const TimeSpan &time);
     friend istream& operator>>(istream & inStream, TimeSpan &time);
+
 private:
     int hours = 0;
     int minutes = 0;
@@ -43,7 +40,7 @@ public:
     TimeSpan operator+(const TimeSpan &time) const;
     TimeSpan operator +=(const TimeSpan &time);
 
-    //Unary
+    //Unary Negation
     TimeSpan operator-() const;
 
     //Equals
