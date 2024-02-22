@@ -20,8 +20,8 @@ void Test(string name)
         cout << "File: " << name << "was not opened" << endl;
     }
 }
-int main()
-{
-    Test("out.txt");
-    return 0; 
-}
+// int main()
+// {
+//     Test("out.txt");
+//     return 0; 
+// }

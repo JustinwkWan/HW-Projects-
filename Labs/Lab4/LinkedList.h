@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <fstream> 
+#include <vector>
 using namespace std; 
 
 class LinkedList { 
@@ -12,13 +13,13 @@ class LinkedList {
 public: 
     Node* head; 
     LinkedList();  
-    LinkedList(string FileName);
     bool BuildList(string fileName);
-    bool insert(int *obj); 
-    void printList(); 
+    bool Insert(int *obj); 
+    bool Peek(int target, int &result); 
+    bool Remove(int target, int &result);
+    void PrintList(); 
     void DeleteList();
-    bool deleteNode(int); 
-    bool isEmpty();
+    bool IsEmpty();
 private: 
     int count = 0;
 }; 

@@ -14,9 +14,7 @@ bool LinkedList::BuildList(string fileName)
     {
         while(!inFile.eof())
         {
-            int item; 
-            inFile >> item; 
-            insert(&item);
+            vector<int> x = new vector
         }
     } else 
     {
@@ -27,48 +25,102 @@ bool LinkedList::BuildList(string fileName)
     return true;
 }
 
-
-bool LinkedList::isEmpty()
+bool LinkedList::IsEmpty()
 {
     return count == 0;
 }
 
-bool LinkedList::insert(int *obj)
+bool LinkedList::Insert(int *obj)
 {
     Node* newNode = new Node;
-    Node* temp; 
+    Node* temp = head; 
     newNode->data = obj;
-
-    if(head == NULL || head->data > newNode->data)
+    if(head == NULL || *head->data > *obj)
     {
         newNode->next = head;
         head = newNode; 
         count++;
-    } else {
-        temp = head; 
-        while(temp->next != NULL && *temp->next->data < *obj)
-        {
-            //Put in code to say no to == numbers
-            temp = temp->next; 
-        }
-        newNode->next = temp->next; 
-        temp->next = newNode; 
-        count++;
+        return true; 
     }
-    //Memory leak when newNode is not deleted
-    //Nodes are not inserted when delete newNode is called
-    //delete newNode;
-    //
+    //Fix leaks data
+    if(*head->data == *obj)
+    {
+        delete newNode;
+        return false;
+    } 
+
+    while(temp->next != NULL && *temp->next->data <= *obj)
+    {   
+        if(*temp->next->data == *obj) return false;
+        temp = temp->next; 
+    }
+    newNode->next = temp->next; 
+    temp->next = newNode; 
+    count++;    
     return true; 
 }
 
-void LinkedList::printList()
+bool LinkedList::Remove(int target, int &result)
+{
+    Node *temp = head;
+    Node *delNode;
+    result = -1;
+    if(head == NULL)
+    {
+        return false;
+    }
+    if(*head->data == target)
+    {
+        result = target;
+        head = head->next; 
+        delete temp;
+        return true; 
+    }
+
+
+    while(temp->next != NULL && *(temp->next->data) != target)
+    {
+        temp = temp->next;
+    }
+    if(temp == NULL)
+    {
+        return false;
+    }
+    result = target;
+    delNode = temp->next;   
+    temp->next = temp->next->next;
+
+    delete delNode;
+    return true; 
+}
+
+bool LinkedList::Peek(int target,int &result) 
+{
+    result = -1;
+    Node* temp = head; 
+    if(temp == NULL)
+    {
+        return false;
+    }
+    while(temp != NULL)
+    {
+        if(*temp->data == target)
+        {
+            result = *temp->data;
+            return true; 
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+
+void LinkedList::PrintList()
 {
     if(head == NULL)
     {
         cout << "List is empty";
     }
-Node* temp = head;
+    Node* temp = head;
     while (temp != NULL) {
         
         cout << *(temp->data) << " ";
@@ -79,17 +131,11 @@ Node* temp = head;
 
 void LinkedList::DeleteList()
 {   
-    Node *temp = head, *next;
-
+    Node *temp = head;
     while(temp != NULL)
     {
-        next = temp->next; 
-        temp = NULL;
+        this->head = head->next;
         delete temp;
-        temp = next; 
+        temp = head;
     }
-    head->data = NULL;
-    delete head; 
-    head = NULL; 
-    count = 0; 
 }
