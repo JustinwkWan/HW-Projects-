@@ -16,7 +16,7 @@ bool LinkedList::BuildList(string fileName)
         {
             int item; 
             inFile >> item;
-            
+            Insert(&item);
         }
     } else 
     {
