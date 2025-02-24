@@ -13,14 +13,16 @@
 using namespace std;
 
 C::C()
+: B("unnamed C", 0, 0, 0), testDataC(0.0)
 {
-  setN("unnamed C");
   cout << "Inside C::C() for object " << getN() << endl;
 }
 
-C::C(string name) : B(name)
+C::C(string name, int data, int data2, int dataB, double dataC)
+: B(name, data, data2, dataB), testDataC(dataC)
 {
-  cout << "Inside C::C(string) for object " << getN() << endl;
+  
+  cout << "Inside C::C(string, int, int, int, double) for object " << getN() << endl;
 }
 
 

@@ -23,14 +23,13 @@ SuperInt::~SuperInt()
 {
   cout << "Destroyed a SuperInt called " + myName << endl;
 }
-
 // For demonstrating lvalues
 
 
-const int& SuperInt::theValue()
+int&  SuperInt::theValue() 
 {
   cout << "Getting value (can't use as lvalue) of a SuperInt called " + myName << endl;
-  myValue = 3;
+  static int myValue = 3;
   return myValue;
 }
 

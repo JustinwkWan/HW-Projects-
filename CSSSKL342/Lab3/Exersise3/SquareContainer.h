@@ -21,6 +21,7 @@ class SquareContainerException : public out_of_range {
 };
 
 class SquareContainer {
+  friend ostream& operator<<(ostream outStream, const SquareContainer &container);
  public:
   // Plain constructor
   SquareContainer();
@@ -42,7 +43,9 @@ class SquareContainer {
 	
   // Current container capacity
   unsigned capacity(void) const;
-	
+
+  
+  SquareContainer& operator=(const SquareContainer &square);	
  private:
   // Utility functions
 
@@ -57,11 +60,7 @@ class SquareContainer {
   Square* theSquares;
 	
   // Where we are and how big we are
-  unsigned nextItem, currentSize;	
-   
+  unsigned nextItem, currentSize;	     
 };
-
-
-
 #endif
 

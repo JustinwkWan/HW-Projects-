@@ -12,15 +12,15 @@
 
 using namespace std;
 
-B::B()
+B::B() : testDataB(0)
 {
-  setN("unnamed B");
-  cout << "Inside B::B() for object " << getN() << endl;
+  cout << "Inside B::B() for object " << getN() << "with the int " << testDataB << endl;
 }
 
-B::B(string name) : A(name)
+B::B(string name, int data, int data2, int dataB) 
+: A(name, data, data2) , testDataB(dataB)
 {
-  cout << "Inside B::B(string) for object " << getN() << endl;
+  cout << "Inside B::B(string, data, data2, dataB) for object " << name << getN() <<  endl;
 }
 
 

@@ -15,12 +15,12 @@ class B : public A
 {
 public:
     B();
-    B(string name);
+    B(string name, int data, int data2, int dataB);
 	~B();
     
     
 private:
-
+    int testDataB;
 };
 
 #endif

@@ -7,6 +7,7 @@
  * Created by Michael Stiber
  * Modified by Yang Peng on 01/12/18
  */
+#pragma once
 #include <string>
 
 class SuperInt {
@@ -18,8 +19,8 @@ class SuperInt {
 
   // For demonstrating lvalues
   //int& theValue(void);
-  const int& theValue(void);
-
+  int& theValue(void);
+  int getMyValue; 
  private:
   int myValue;
   std::string myName;

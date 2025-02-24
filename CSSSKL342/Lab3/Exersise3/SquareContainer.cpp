@@ -8,6 +8,12 @@
 
 const unsigned DEFAULTSIZE = 10;
 
+ostream &operator<<(ostream &os, const SquareContainer& container)
+{
+    
+    return os;
+}
+
 // Plain constructor
 SquareContainer::SquareContainer() : currentSize(DEFAULTSIZE), nextItem(0)
 {
@@ -91,4 +97,14 @@ void SquareContainer::clear(void)
   theSquares = NULL;
   nextItem = currentSize = 0;
 
+}
+
+SquareContainer &SquareContainer:: operator=(const SquareContainer &oSquare)
+{
+  clear();
+  currentSize = oSquare.currentSize;
+  nextItem = oSquare.nextItem;
+  theSquares = new Square[currentSize];
+  copy(theSquares, oSquare.theSquares);
+  return *this;
 }

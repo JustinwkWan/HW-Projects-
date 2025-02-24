@@ -12,17 +12,19 @@
 
 using namespace std;
 
-A::A()
+A::A() : n("unnamed A"), testData1(0), testData2(0)
 {
-    n = "unnamed A";
-    cout << "Inside A::A() for object " << n << endl;
+    cout << "Inside A::A() for object " << n << "with ints data: " << 
+    testData1 << "and data2: " << testData2 << endl;
+    
 }
 
-A::A(string name) : n(name)
+A::A(string name, int data, int data2) 
+: n(name) , testData1(data) , testData2(data2)
 {
-    cout << "Inside A::A(string) for object " << n << endl;
+    cout << "Inside A::A(string, int, int) for object " << n << " with ints data: " << testData1 << " and data2: " << testData2 << endl;
+    
 }
-
 
 A::~A()
 {
