@@ -34,7 +34,7 @@ public:
     bool isEmpty() const;     //is list Empty?
     void makeEmpty();         // delete all memory so isEmpty() returns true
 
-    BinTree& operator=(const BinTree &);    //lhs = rhs
+    
     bool operator==(const BinTree &) const; //true if two BST are equal
     bool operator!=(const BinTree &) const; //true if two BST are not equal
     
@@ -60,7 +60,10 @@ public:
     //returns if node is successfully found, if target is root is false
     bool getParent(const NodeData&, NodeData&) const; 
 
+    void display() const;
     friend ostream& operator<<(ostream &os, const BinTree &tree);
+
+
 private:
 struct Node {
     NodeData* data; // pointer to data object
@@ -72,7 +75,7 @@ Node* root = nullptr; // root of the tree
 // utility functions
 //----------------------------------------------------------------------------
 // recursive helper for operator<<
-void inorderHelper( ostream&, const Node* ) const; 
+void inorderHelper(const Node* ) const; 
 
 void sidewaysHelper(Node*, int) const; // recursive helper for displaySideways
 // recursive helper for operator== 

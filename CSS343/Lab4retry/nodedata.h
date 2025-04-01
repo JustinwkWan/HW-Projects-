@@ -7,30 +7,30 @@ using namespace std;
 
 // simple class containing one string to use for testing
 // not necessary to comment further
-
 class NodeData {
    friend ostream & operator<<(ostream &, const NodeData &);
 
 public:
-   NodeData();          // default constructor, data is set to an empty string
-   ~NodeData();          
-   NodeData(const string &);      // data is set equal to parameter
-   NodeData(const NodeData &);    // copy constructor
-   NodeData& operator=(const NodeData &);
-
-   // set class data from data file
-   // returns true if the data is set, false when bad data, i.e., is eof
-   bool setData(istream&);                
-
-   bool operator==(const NodeData &) const;
-   bool operator!=(const NodeData &) const;
-   bool operator<(const NodeData &) const;
-   bool operator>(const NodeData &) const;
-   bool operator<=(const NodeData &) const;
-   bool operator>=(const NodeData &) const;
-
-private:
-   string data;          
+    NodeData(); // default constructor, data is set to an empty string
+    virtual ~NodeData(); // virtual destructor
+    virtual bool setData(istream&) = 0; // sets data  
+    virtual bool setSortingData(istream&) = 0; // sets sorting data 
+    virtual NodeData* create() const = 0; // creates a nodedata
+    bool isAvalible();
+    bool increment();
+    bool decrement();
+    //Sorting fuctions
+    virtual bool operator==(const NodeData &) const = 0; //lhs == rhs
+    virtual bool operator<(const NodeData &) const = 0; // lhs < rhs
+    virtual bool operator>(const NodeData &) const = 0; // lhs > rhs
+    virtual void display() const = 0; //displays nodedata to console
+     // displays heading for each pubtype
+    virtual void displayHeading() const = 0;
+    //displays info about each pubtype
+    virtual void displayInfo() const = 0;  
+    protected: 
+    string data;
+    int count; 
 };
 
 #endif

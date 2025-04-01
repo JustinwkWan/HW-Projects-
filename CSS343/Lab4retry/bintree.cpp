@@ -1,28 +1,17 @@
 
-////////////////////////////////  list.cpp file  /////////////////////////////
+////////////////////////////////  bintree.cpp file  /////////////////////////////
 
 #include "bintree.h"
 
-//----------------------------------------------------------------------------
-// operator<<: return the binary tree though inorder traversal  
-// responsibility of output is left to object stored in BST
-// inorderHelper iterators though binary tree to give inorder traversal
-ostream& operator<<(ostream& output, const BinTree &tree) {
-    if(tree.isEmpty()) {
-        output << endl;
-        return output; 
-    }
-    tree.inorderHelper(output, tree.root);
-    output << endl;
-    return output;                 //Enables outout
+void BinTree::display() const{
+    inorderHelper(root);
 }
-
-void BinTree::inorderHelper(ostream& output, const Node* current) const {
+void BinTree::inorderHelper( const Node* current) const {
     if(current != nullptr) //As long as there are still nodes   
     {
-        inorderHelper(output, current->left);
-        cout << *current->data << " "; 
-        inorderHelper(output, current->right);
+        inorderHelper(current->left);
+        current->data->display();
+        inorderHelper(current->right);
     }
 }
 
@@ -30,37 +19,6 @@ void BinTree::inorderHelper(ostream& output, const Node* current) const {
 // BinTree: Default constructor
 BinTree::BinTree() {
     root = nullptr; 
-}
-
-//----------------------------------------------------------------------------
-// BinTree: Copy constructor
-// Creates a deep copy of another BinTree object
-// copyHelper iterates through the other BinTree until all nodes copied over
-BinTree::BinTree(const BinTree &other) {
-    copyHelper(root, other.root);
-}
-
-void BinTree::copyHelper(Node* &current, const Node* other) {
-    if(other != nullptr) { //While other BinTree not empty
-        current = new Node; 
-        current->data = new NodeData(*other->data); //Copy data over
-
-        current->left = current->right = nullptr;
-        copyHelper(current->right, other->right); //iterate though other tree
-        copyHelper(current->left, other->left);
-    }
-}
-
-//----------------------------------------------------------------------------
-// operator=: sets lhs to rhs 
-BinTree& BinTree::operator=(const BinTree &other) {
-    if(other.isEmpty()) {makeEmpty();} 
-    if(this != &other) {
-        makeEmpty(); // empties out *this tree
-        copyHelper(root, other.root); //copies over tree
-        return *this;
-    }
-    return *this;
 }
 
 //----------------------------------------------------------------------------
@@ -142,8 +100,7 @@ bool BinTree::insert(NodeData* dataptr) {
             if (current->left == nullptr) { // at leaf, insert left
                current->left = ptr;                       
                inserted = true;
-            }
-            else
+            } else
                current = current->left;     // one step left
          }
          else if(*ptr->data > *current->data) { // handles >=
@@ -204,15 +161,24 @@ bool BinTree::equalHelper(const Node* current,const Node* other) const {
 bool BinTree::retrieve(const NodeData& target, NodeData*& retNode) const { 
     Node* temp = root; //set and traverse tree using temp
     while(!(temp == nullptr)) {
+        
         if(*temp->data == target) {
             retNode = temp->data;
             return true; 
         }
-
         if(*temp->data > target) { 
-            temp = temp->left; // using binary search
+            if(temp->left != nullptr) {
+           temp = temp->left; // using binary search
         } else {
-           temp = temp->right;
+            break;
+        }
+            
+        } else {
+            if(temp->right != nullptr) {
+                temp = temp->right;
+            } else {
+                break;
+            }  
         }
     }
     return false; //if we break out of loop, means target is not in BST
