@@ -46,7 +46,10 @@
         "list": "cpp",
         "map": "cpp",
         "cinttypes": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "wait.h": "c",
+        "shell.h": "c",
+        "string.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabled",
     "C_Cpp.default.compilerPath": "/usr/bin/g++"
